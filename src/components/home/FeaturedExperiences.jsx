@@ -1,8 +1,14 @@
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from '../Link';
-import { experiences } from '../../data/experiences';
+import { useContent } from '../../contexts/ContentContext';
+import { experiences as staticExperiences } from '../../data/experiences';
+
 export default function FeaturedExperiences() {
-    const featured = experiences.slice(0, 3);
+    const { content } = useContent();
+    const featured = content.experiences.slice(0, 3).map(e => ({
+      ...e,
+      image: e.customImage || staticExperiences.find(se => se.slug === e.slug)?.image,
+    }));
     return (<section className="bg-forest-900 py-24 text-sand-50 sm:py-32">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">

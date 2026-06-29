@@ -1,8 +1,10 @@
 import { Star, Quote } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import { Link } from '../components/Link';
-import { testimonials } from '../data/testimonials';
+import { useContent } from '../contexts/ContentContext';
 export default function Stories() {
+    const { content } = useContent();
+    const testimonials = content.testimonials || [];
     const [featured, ...rest] = testimonials;
     return (<>
       <PageHeader eyebrow="Guest Reviews" title={<>

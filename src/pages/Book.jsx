@@ -2,8 +2,8 @@ import { Phone, Mail, MapPin, Clock, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import BookingForm from '../components/BookingForm';
-import { faqs } from '../data/pages';
 import { site } from '../data/site';
+import { useContent } from '../contexts/ContentContext';
 import roomOne from '../Assets/room one.jpeg';
 const contact = [
     {
@@ -39,6 +39,8 @@ const contact = [
 ];
 export default function Book() {
     const [openFaq, setOpenFaq] = useState(0);
+    const { content } = useContent();
+    const faqs = content.faqs || [];
     return (<>
       <PageHeader eyebrow="Book Your Stay" title={<>
             Pick your room and dates.

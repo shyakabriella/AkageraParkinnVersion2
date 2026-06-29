@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { Clock, Calendar, Gauge, Check, ArrowLeft } from 'lucide-react';
 import { Link } from '../components/Link';
-import { getExperience, experiences } from '../data/experiences';
+import { experiences as staticExperiences } from '../data/experiences';
+import { useContent } from '../contexts/ContentContext';
 import NotFound from './NotFound';
 const difficultyColor = {
     Moderate: 'bg-sand-500/20 text-sand-700',
@@ -9,9 +10,13 @@ const difficultyColor = {
 };
 export default function ExperienceDetail() {
     const { slug } = useParams();
-    const exp = getExperience(slug);
-    if (!exp)
-        return <NotFound />;
+    const { content } = useContent();
+    const experiences = content.experiences.map(e => ({
+      ...e,
+      image: e.customImage || staticExperiences.find(se => se.slug === e.slug)?.image,
+    }));
+    const exp = experiences.find(e => e.slug === slug);
+    if (!exp) return <NotFound />;
     const others = experiences.filter((e) => e.slug !== exp.slug).slice(0, 3);
     return (<>
       <header className="relative isolate overflow-hidden">

@@ -1,6 +1,8 @@
 import { ArrowUpRight, Users, Eye } from 'lucide-react';
 import { Link } from '../Link';
-import { suites } from '../../data/suites';
+import { useContent } from '../../contexts/ContentContext';
+import { suites as staticSuites } from '../../data/suites';
+
 function Spec({ icon: Icon, label, value }) {
     return (<div className="flex items-center gap-2 text-forest-800/80">
       <Icon className="h-4 w-4 text-forest-600" strokeWidth={1.5}/>
@@ -8,7 +10,13 @@ function Spec({ icon: Icon, label, value }) {
       <span className="text-sm font-medium text-forest-900">{value}</span>
     </div>);
 }
+
 export default function FeaturedStays() {
+    const { content } = useContent();
+    const suites = content.suites.map(suite => ({
+      ...suite,
+      image: suite.customImage || staticSuites.find(s => s.slug === suite.slug)?.image,
+    }));
     return (<section className="bg-sand-50 bg-grain py-24 sm:py-32">
       <div className="container-x">
         <div className="flex flex-col items-center justify-center gap-6 text-center">

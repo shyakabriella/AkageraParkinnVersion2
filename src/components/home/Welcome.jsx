@@ -1,5 +1,6 @@
 import { Leaf, Heart, Compass, Sun } from 'lucide-react';
 import { site } from '../../data/site';
+import { useContent } from '../../contexts/ContentContext';
 import nightView from '../../Assets/night view.avif';
 import roomOne from '../../Assets/room one.jpeg';
 const pillars = [
@@ -25,6 +26,8 @@ const pillars = [
     },
 ];
 export default function Welcome() {
+    const { content } = useContent();
+    const cms = content.site;
     return (<section className="relative bg-sand-50 bg-grain py-24 sm:py-32">
       <div className="container-x">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
@@ -47,14 +50,12 @@ export default function Welcome() {
           </div>
 
           <div className="lg:col-span-6">
-            <p className="eyebrow reveal">Welcome to {site.name}</p>
+            <p className="eyebrow reveal">Welcome to {cms?.name || site.name}</p>
             <h2 className="reveal mt-5 font-display text-4xl font-medium leading-tight text-forest-950 sm:text-5xl">
-              {site.tagline}
+              {cms?.tagline || site.tagline}
             </h2>
             <p className="reveal mt-6 text-lg leading-relaxed text-forest-800/85">
-              {site.description} The volcanic stone designs and tranquil
-              setting make Akagera Park Inn a peaceful escape with stunning
-              views and top-notch service.
+              {cms?.description || site.description}
             </p>
             <p className="reveal mt-4 text-base leading-relaxed text-forest-800/70">
               Whether you are exploring Akagera National Park or passing

@@ -1,9 +1,15 @@
 import { Clock, Calendar, ArrowUpRight } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import { Link } from '../components/Link';
-import { experiences } from '../data/experiences';
+import { experiences as staticExperiences } from '../data/experiences';
+import { useContent } from '../contexts/ContentContext';
 import p5 from '../Assets/p5.jpg';
 export default function Experiences() {
+    const { content } = useContent();
+    const experiences = content.experiences.map(e => ({
+      ...e,
+      image: e.customImage || staticExperiences.find(se => se.slug === e.slug)?.image,
+    }));
     return (<>
       <PageHeader eyebrow="Services" title={<>
             Restaurant, pool, laundry

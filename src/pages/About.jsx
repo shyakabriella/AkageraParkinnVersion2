@@ -1,6 +1,7 @@
 import { Leaf, Heart, Sun, Wifi, Car, UtensilsCrossed } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import { site } from '../data/site';
+import { useContent } from '../contexts/ContentContext';
 import nightView from '../Assets/night view.avif';
 import roomTwo from '../Assets/room two.jpeg';
 const highlights = [
@@ -36,11 +37,14 @@ const highlights = [
     },
 ];
 export default function About() {
+    const { content } = useContent();
+    const cms = content.site;
+    const about = content.about;
     return (<>
       <PageHeader eyebrow="About Us" title={<>
             Experience local culture,
             <span className="italic text-sand-200"> heritage, and unforgettable moments.</span>
-          </>} subtitle={site.description} image={nightView}/>
+          </>} subtitle={cms?.description || site.description} image={about?.customHeroImage || nightView}/>
 
       <section className="bg-sand-50 bg-grain py-24 sm:py-32">
         <div className="container-x">
@@ -48,32 +52,17 @@ export default function About() {
             <div className="lg:col-span-7">
               <p className="eyebrow reveal">Our Hotel</p>
               <h2 className="reveal mt-5 font-display text-3xl font-medium leading-tight text-forest-950 sm:text-4xl">
-                A peaceful  hotel minutes from Akagera National Park.
+                {about?.heading || 'A peaceful hotel minutes from Akagera National Park.'}
               </h2>
               <div className="reveal mt-6 space-y-4 text-lg leading-relaxed text-forest-800/85">
-                <p>
-                  {site.name} is located at {site.address}, in the heart of
-                  Akagera Village. We are a short drive from the Akagera
-                  National Park South Entrance — making us an ideal base for
-                  safari days and restful evenings alike.
-                </p>
-                <p>
-                  Our {site.roomCount} rooms feature handcrafted wooden
-                  furniture, private balconies, air conditioning, smart TVs,
-                  and complimentary high-speed Wi-Fi. Every room booking
-                  includes a full breakfast for registered guests.
-                </p>
-                <p>
-                  Beyond accommodation, we offer a restaurant & lounge, bar,
-                  outdoor pool, and laundry service — all
-                  bookable with or without a room. Check-in and check-out are
-                  from {site.checkIn} to {site.checkOut}, with {site.reception.toLowerCase()}.
-                </p>
+                <p>{about?.p1 || `${site.name} is located at ${site.address}, in the heart of Akagera Village.`}</p>
+                <p>{about?.p2 || `Our ${site.roomCount} rooms feature handcrafted wooden furniture, private balconies, air conditioning, smart TVs, and complimentary high-speed Wi-Fi.`}</p>
+                <p>{about?.p3 || `Beyond accommodation, we offer a restaurant & lounge, bar, outdoor pool, and laundry service.`}</p>
               </div>
             </div>
             <div className="lg:col-span-5">
               <div className="reveal sticky top-28 overflow-hidden rounded-3xl shadow-lift">
-                <img src={roomTwo} alt="Akagera Park Inn room" className="h-[420px] w-full object-cover" loading="lazy"/>
+                <img src={about?.customSideImage || roomTwo} alt="Akagera Park Inn room" className="h-[420px] w-full object-cover" loading="lazy"/>
               </div>
             </div>
           </div>

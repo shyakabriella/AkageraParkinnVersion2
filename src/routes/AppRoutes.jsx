@@ -12,6 +12,8 @@ import Gallery from "../pages/Gallery";
 import Stories from "../pages/Stories";
 import Book from "../pages/Book";
 import NotFound from "../pages/NotFound";
+import Login from "../pages/Login";
+import Dashboard from "../pages/Dashboard";
 
 const SuiteDetailWrapper = () => {
   const { slug } = useParams();
@@ -26,6 +28,11 @@ const ExperienceDetailWrapper = () => {
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Stand-alone pages (no navbar/footer) */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard/*" element={<Dashboard />} />
+
+      {/* Public site with Navbar + Footer */}
       <Route path="/" element={<Layouts />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
@@ -43,3 +50,4 @@ export default function AppRoutes() {
     </Routes>
   );
 }
+

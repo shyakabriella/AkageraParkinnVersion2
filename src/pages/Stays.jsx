@@ -2,7 +2,8 @@ import { createElement } from 'react';
 import { Users, Eye, Check } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import { Link } from '../components/Link';
-import { suites } from '../data/suites';
+import { suites as staticSuites } from '../data/suites';
+import { useContent } from '../contexts/ContentContext';
 function Spec({ icon, label, value }) {
     return (<div className="flex items-center gap-2 text-forest-800/80">
       {createElement(icon, { className: 'h-4 w-4 text-forest-600', strokeWidth: 1.5 })}
@@ -11,6 +12,13 @@ function Spec({ icon, label, value }) {
     </div>);
 }
 export default function Stays() {
+    const { content } = useContent();
+    // Merge editable text from ContentContext with static images from data file
+    const suites = content.suites.map(suite => ({
+      ...suite,
+      image: suite.customImage || staticSuites.find(s => s.slug === suite.slug)?.image,
+      gallery: staticSuites.find(s => s.slug === suite.slug)?.gallery,
+    }));
     return (<>
       <PageHeader eyebrow="Rooms" title={<>
             Comfortable rooms with breakfast included,

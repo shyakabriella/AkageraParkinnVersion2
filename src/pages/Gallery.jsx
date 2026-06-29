@@ -1,12 +1,33 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import PageHeader from '../components/PageHeader';
-import { galleryImages, galleryCategories } from '../data/gallery';
+import { galleryImages as staticGallery } from '../data/gallery';
+import { useContent } from '../contexts/ContentContext';
+
 export default function Gallery() {
+    const { content } = useContent();
     const [active, setActive] = useState('All');
     const [lightbox, setLightbox] = useState(null);
+
+    const staticImagesWithIds = useMemo(() => 
+      staticGallery.map((img, i) => ({ ...img, _id: `g${i}` })), 
+    []);
+
+    const gallery = useMemo(() => {
+      return (content.gallery || []).map(item => ({
+        ...item,
+        src: staticImagesWithIds.find(img => img._id === item._id)?.src || item.srcUrl,
+      }));
+    }, [content.gallery, staticImagesWithIds]);
+
+    const galleryCategories = useMemo(() => {
+      const categories = new Set(gallery.map(img => img.category).filter(Boolean));
+      return ['All', ...Array.from(categories)];
+    }, [gallery]);
+
     const filtered = active === 'All'
-        ? galleryImages
-        : galleryImages.filter((img) => img.category === active);
+        ? gallery
+        : gallery.filter((img) => img.category === active);
+
     return (<>
       <PageHeader eyebrow="Through Our Lens" title={<>
             A few moments
@@ -26,7 +47,7 @@ export default function Gallery() {
 
           {/* Grid */}
           <div className="reveal mt-14 grid auto-rows-[200px] grid-cols-2 gap-4 sm:auto-rows-[240px] lg:grid-cols-4">
-            {filtered.map((img) => (<button key={img.src} type="button" onClick={() => setLightbox(img.src)} className={`group relative overflow-hidden rounded-2xl text-left ${img.span ?? ''}`}>
+            {filtered.map((img, index) => (<button key={img._id || index} type="button" onClick={() => setLightbox(img.src)} className={`group relative overflow-hidden rounded-2xl text-left ${img.span ?? ''}`}>
                 <img src={img.src} alt={img.alt} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"/>
                 <div className="absolute bottom-4 left-4 right-4 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">

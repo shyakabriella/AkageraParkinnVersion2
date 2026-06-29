@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { ArrowDown, MapPin } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
+import { MapPin } from 'lucide-react';
 import { Link } from './Link';
 import { site } from '../data/site';
+import { useContent } from '../contexts/ContentContext';
 import img1 from '../Assets/p1.jpg';
 import img2 from '../Assets/p3.jpg';
 import img3 from '../Assets/p4.jpg';
@@ -10,18 +11,27 @@ import img4 from '../Assets/night view.avif';
 const heroImages = [img1, img2, img3, img4];
 
 export default function Hero() {
+    const { content } = useContent();
+    const { hero, site: cms } = content;
     const [currentImage, setCurrentImage] = useState(0);
+
+    const activeImages = useMemo(() => [
+      hero?.bgImage1 || img1,
+      hero?.bgImage2 || img2,
+      hero?.bgImage3 || img3,
+      hero?.bgImage4 || img4,
+    ], [hero]);
 
     useEffect(() => {
       const timer = setInterval(() => {
-        setCurrentImage((prev) => (prev + 1) % heroImages.length);
+        setCurrentImage((prev) => (prev + 1) % activeImages.length);
       }, 6000); // Change image every 6 seconds
       return () => clearInterval(timer);
-    }, []);
+    }, [activeImages.length]);
 
     return (<section id="top" className="relative min-h-screen overflow-hidden">
       <div className="absolute inset-0">
-        {heroImages.map((img, index) => (
+        {activeImages.map((img, index) => (
           <div
             key={index}
             className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
@@ -47,15 +57,13 @@ export default function Hero() {
           </p>
 
           <h1 className="mt-6 font-display text-5xl font-medium leading-[1.05] text-sand-50 opacity-0 animate-fade-in-up sm:text-6xl lg:text-7xl" style={{ animationDelay: '0.25s' }}>
-            Welcome back to
+            {hero?.headline || 'Welcome back to'}
             <br />
-            <span className="italic text-sand-200">{site.name}.</span>
+            <span className="italic text-sand-200">{cms?.name || site.name}.</span>
           </h1>
 
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-sand-100/85 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.45s' }}>
-            {site.tagline}. Experience local culture, heritage, and
-            unforgettable moments at our  hotel minutes from Akagera
-            National Park.
+            {hero?.subtitle || site.tagline}
           </p>
 
           <div className="mt-10 flex flex-col gap-4 opacity-0 animate-fade-in-up sm:flex-row sm:items-center" style={{ animationDelay: '0.65s' }}>

@@ -1,13 +1,20 @@
 import { useParams } from 'react-router-dom';
 import { Users, Maximize, Eye, Check, ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Link } from '../components/Link';
-import { getSuite, suites } from '../data/suites';
+import { suites as staticSuites } from '../data/suites';
+import { useContent } from '../contexts/ContentContext';
 import NotFound from './NotFound';
 export default function SuiteDetail() {
     const { slug } = useParams();
-    const suite = getSuite(slug);
-    if (!suite)
-        return <NotFound />;
+    const { content } = useContent();
+    // Merge editable text with static images
+    const suites = content.suites.map(s => ({
+      ...s,
+      image: s.customImage || staticSuites.find(st => st.slug === s.slug)?.image,
+      gallery: staticSuites.find(st => st.slug === s.slug)?.gallery,
+    }));
+    const suite = suites.find(s => s.slug === slug);
+    if (!suite) return <NotFound />;
     const others = suites.filter((s) => s.slug !== suite.slug);
     return (<>
       {/* Hero */}
