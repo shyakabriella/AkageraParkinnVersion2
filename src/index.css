@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-sand-50 text-forest-950 font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-forest-700 text-sand-50;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-forest-600;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-8 bg-forest-500/60;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest-700 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-sand-50 transition-all duration-300 hover:bg-forest-800 hover:shadow-xl hover:shadow-forest-900/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-sand-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-sand-50/40 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-sand-50 transition-all duration-300 hover:border-sand-50 hover:bg-sand-50/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sand-50/60;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-forest-700/30 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-forest-800 transition-all duration-300 hover:border-forest-700 hover:bg-forest-700 hover:text-sand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500;
+  }
+  .field {
+    @apply w-full rounded-xl border border-forest-900/10 bg-sand-50/60 px-4 py-3 text-sm text-forest-950 placeholder-forest-700/40 transition-all duration-200 focus:border-forest-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-forest-500/30;
+  }
+  .field-label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-forest-700/80;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .bg-grain {
+    background-image: radial-gradient(rgba(36, 53, 34, 0.04) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+  .shadow-soft {
+    box-shadow: 0 1px 2px rgba(18, 29, 17, 0.04), 0 12px 32px -12px rgba(18, 29, 17, 0.18);
+  }
+  .shadow-lift {
+    box-shadow: 0 24px 60px -24px rgba(18, 29, 17, 0.35);
+  }
+}
