@@ -17,10 +17,12 @@ export default function Login() {
   const [mounted, setMounted] = useState(false);
   const [slideIdx, setSlideIdx] = useState(0);
 
-  // Redirect if already logged in
   useEffect(() => {
     setMounted(true);
-    if (user) navigate('/dashboard', { replace: true });
+    // If user is already logged in, redirect to dashboard
+    if (user) {
+      navigate('/dashboard', { replace: true });
+    }
   }, [user, navigate]);
 
   // Auto-slide the hero image
@@ -63,7 +65,6 @@ export default function Login() {
               'linear-gradient(135deg, rgba(9,31,13,0.65) 0%, rgba(9,31,13,0.2) 50%, rgba(0,0,0,0.55) 100%)',
           }}
         />
-        {/* Bottom fade for text legibility */}
         <div
           className="absolute inset-x-0 bottom-0 h-72"
           style={{
@@ -166,17 +167,6 @@ export default function Login() {
             </p>
           </div>
 
-          {/* Demo hint */}
-          <div className="mb-7 rounded-xl border border-forest-600/25 bg-forest-900/40 px-4 py-3">
-            <p className="text-xs text-forest-300/80 leading-relaxed">
-              <span className="font-semibold text-forest-200">Demo:</span>
-              {' '}admin@akageraparkinn.com
-              <br />
-              <span className="font-semibold text-forest-200">Password:</span>
-              {' '}akagera2025
-            </p>
-          </div>
-
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             {/* Email */}
@@ -196,7 +186,7 @@ export default function Login() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@akageraparkinn.com"
+                  placeholder="Enter your email"
                   className="w-full rounded-xl border border-white/10 bg-white/5 py-3.5 pl-11 pr-4 text-sm text-sand-50 placeholder-sand-500/40 transition-all duration-200 focus:border-forest-500/60 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-forest-500/20"
                 />
               </div>
@@ -219,7 +209,7 @@ export default function Login() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••"
+                  placeholder="Enter your password"
                   className="w-full rounded-xl border border-white/10 bg-white/5 py-3.5 pl-11 pr-12 text-sm text-sand-50 placeholder-sand-500/40 transition-all duration-200 focus:border-forest-500/60 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-forest-500/20"
                 />
                 <button
@@ -244,7 +234,6 @@ export default function Login() {
             {/* Submit */}
             <button
               type="submit"
-              id="login-submit"
               disabled={loading}
               className="relative mt-1 w-full overflow-hidden rounded-xl py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 disabled:opacity-60"
               style={{

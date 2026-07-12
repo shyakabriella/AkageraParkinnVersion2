@@ -1,4 +1,4 @@
-// src/pages/dashboard/GallerySection.jsx
+// src/pages/dashboard/ServicesSection.jsx
 import { useState, useEffect } from "react";
 import {
   Save,
@@ -12,11 +12,15 @@ import {
   Plus,
   X,
   Sun,
-  Image,
+  Utensils,
+  Coffee,
+  Waves,
+  Sparkles,
+  Wifi,
   Eye,
-  Camera,
-  Tag,
-  Filter,
+  Users,
+  Clock,
+  CalendarCheck,
 } from "lucide-react";
 
 const API_URL = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8001/api").replace(/\/$/, "");
@@ -57,68 +61,72 @@ function stripFilesForSubmit(node, formData, pathParts) {
   return node;
 }
 
-// ─── DEFAULT GALLERY CONTENT ──────────────────────────────────────────────
-const DEFAULT_GALLERY_CONTENT = {
+const DEFAULT_SERVICES_CONTENT = {
   hero: {
-    title: "Through Our Lens",
-    subtitle: "A few moments we never want to forget.",
-    description: "Captured by our guests and guides over the past season. Tag us @akageraparkinn to share yours.",
-    background_image: "/images/gallery/hero-bg.jpg",
+    title: "Services",
+    subtitle: "Restaurant, pool, laundry and more.",
+    description: "Book any service with or without a room — restaurant, bar, laundry, and airport shuttle. Combine services however suits your trip.",
+    background_image: "/images/services/hero-bg.jpg",
   },
-  gallery: {
-    categories: [
-      { id: "all", label: "All", icon: "📸" },
-      { id: "rooms", label: "Rooms", icon: "🛏️" },
-      { id: "hotel", label: "Hotel", icon: "🏨" },
-      { id: "dining", label: "Dining", icon: "🍽️" },
-      { id: "pool", label: "Pool", icon: "🏊" },
-    ],
-    images: [
-      { 
-        id: 1,
-        category: "rooms",
-        image: "/images/gallery/room-1.jpg",
+  services: {
+    title: "More to do",
+    items: [
+      {
+        title: "Outdoor Pool & Garden",
+        subtitle: "All day · Year round",
+        description: "Unwind in our outdoor swimming pool with a comfortable poolside sitting area, surrounded by gardens and mountain views.",
+        background_image: "/images/services/pool.jpg",
+        link: "/services/pool",
+        duration: "All day",
+        when: "Year round",
+        level: "All experiences",
+        what_is_included: "Pool access, Garden & terrace, Poolside seating, Free for hotel guests",
+        book_button_text: "Book This Experience",
+        book_button_link: "/booking",
       },
-      { 
-        id: 2,
-        category: "rooms",
-        image: "/images/gallery/room-2.jpg",
+      {
+        title: "Restaurant & Lounge",
+        subtitle: "Daily · Breakfast, lunch & dinner",
+        description: "African, American, and Argentinian cuisine in a relaxed lounge setting — vegetarian, dairy-free, and halal options available.",
+        background_image: "/images/services/restaurant.jpg",
+        link: "/services/restaurant",
+        duration: "Daily",
+        when: "Breakfast, lunch & dinner",
+        level: "All experiences",
+        what_is_included: "Full breakfast with rooms, Vegetarian options, Halal options, Room service, Bar service",
+        book_button_text: "Book This Experience",
+        book_button_link: "/booking",
       },
-      { 
-        id: 3,
-        category: "hotel",
-        image: "/images/gallery/hotel-1.jpg",
+      {
+        title: "Laundry Service",
+        subtitle: "Same day · Daily",
+        description: "Fresh clothes when you need them — our laundry service keeps you comfortable throughout your stay.",
+        background_image: "/images/services/laundry.jpg",
+        link: "/services/laundry",
+        duration: "Same day",
+        when: "Daily",
+        level: "All experiences",
+        what_is_included: "Laundry & dry cleaning, Room service pickup, Book without a room",
+        book_button_text: "Book This Experience",
+        book_button_link: "/booking",
       },
-      { 
-        id: 4,
-        category: "hotel",
-        image: "/images/gallery/hotel-2.jpg",
-      },
-      { 
-        id: 5,
-        category: "dining",
-        image: "/images/gallery/dining-1.jpg",
-      },
-      { 
-        id: 6,
-        category: "dining",
-        image: "/images/gallery/dining-2.jpg",
-      },
-      { 
-        id: 7,
-        category: "pool",
-        image: "/images/gallery/pool-1.jpg",
-      },
-      { 
-        id: 8,
-        category: "pool",
-        image: "/images/gallery/pool-2.jpg",
+      {
+        title: "Bar & Drinks",
+        subtitle: "Evenings · Daily",
+        description: "Poolside bar and lounge drinks — unwind with a cold drink after a day in the park.",
+        background_image: "/images/services/bar.jpg",
+        link: "/services/bar",
+        duration: "Evenings",
+        when: "Daily",
+        level: "All experiences",
+        what_is_included: "Poolside bar, Lounge service, Book without a room",
+        book_button_text: "Book This Experience",
+        book_button_link: "/booking",
       },
     ],
   },
 };
 
-// ─── IMAGE DROPZONE ──────────────────────────────────────────────────────────
 function ImageDropzone({ label, preview, uploading, height, onUpload, onRemove, compact, small }) {
   return (
     <div>
@@ -148,18 +156,10 @@ function ImageDropzone({ label, preview, uploading, height, onUpload, onRemove, 
   );
 }
 
-// ─── GALLERY PREVIEW ──────────────────────────────────────────────────────────
-function GalleryPreview({ data, onClose }) {
+// ─── SERVICES PREVIEW ──────────────────────────────────────────────────────────
+function ServicesPreview({ data, onClose }) {
   const content = data || {};
-  const hero = content.hero || {};
-  const gallery = content.gallery || {};
-  const categories = gallery.categories || [];
-  const allImages = gallery.images || [];
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const filteredImages = activeCategory === "all" 
-    ? allImages 
-    : allImages.filter(img => img.category === activeCategory);
+  const services = content.services?.items || [];
 
   return (
     <div className="fixed inset-0 z-50 bg-stone-50 overflow-y-auto">
@@ -167,11 +167,12 @@ function GalleryPreview({ data, onClose }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Eye className="h-5 w-5 text-emerald-600" />
-            <span className="text-sm font-semibold text-stone-700">Gallery Preview</span>
+            <span className="text-sm font-semibold text-stone-700">Services Page Preview</span>
             <span className="text-xs text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">Website View</span>
           </div>
           <button onClick={onClose} className="flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg hover:bg-stone-200 transition text-sm font-medium">
-            <X className="h-4 w-4" /> Close Preview
+            <X className="h-4 w-4" />
+            Close Preview
           </button>
         </div>
       </div>
@@ -179,81 +180,59 @@ function GalleryPreview({ data, onClose }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero */}
         <div className="relative rounded-2xl overflow-hidden mb-12">
-          {hero.background_image ? (
-            <img src={getImageUrl(hero.background_image)} alt="Hero" className="w-full h-[350px] object-cover" />
+          {content.hero?.background_image ? (
+            <img src={getImageUrl(content.hero.background_image)} alt="Hero" className="w-full h-[350px] object-cover" />
           ) : (
             <div className="w-full h-[350px] bg-gradient-to-r from-emerald-800 to-emerald-600" />
           )}
           <div className="absolute inset-0 bg-black/50" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-            <h1 className="text-4xl md:text-5xl font-bold">{hero.title || "Through Our Lens"}</h1>
-            <p className="mt-2 text-lg text-white/80">{hero.subtitle || ""}</p>
-            <p className="mt-3 text-sm text-white/70 max-w-2xl">{hero.description || ""}</p>
+            <h1 className="text-4xl md:text-5xl font-bold">{content.hero?.title || "Services"}</h1>
+            <p className="mt-2 text-lg text-white/80">{content.hero?.subtitle || ""}</p>
+            <p className="mt-3 text-sm text-white/70 max-w-2xl">{content.hero?.description || ""}</p>
           </div>
         </div>
 
-        {/* Gallery Grid - ✅ Only images with category badges */}
-        <div>
-          {/* Category Tabs */}
-          {categories && categories.length > 0 && (
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === cat.id
-                      ? "bg-emerald-600 text-white shadow-md"
-                      : "bg-white text-stone-600 hover:bg-stone-100 border border-stone-200"
-                  }`}
-                >
-                  {cat.icon} {cat.label}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Image Grid - ✅ Only images, no captions/photographer/date */}
-          {filteredImages && filteredImages.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filteredImages.map((item) => {
-                const img = getImageUrl(item.image);
-                const categoryLabel = categories.find(c => c.id === item.category)?.label || item.category;
+        {/* Services Grid */}
+        {services && services.length > 0 ? (
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-stone-800 text-center">{content.services?.title || "More to do"}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+              {services.map((service, index) => {
+                const img = getImageUrl(service.background_image);
                 return (
-                  <div key={item.id} className="group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                  <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-md transition">
                     {img ? (
-                      <img 
-                        src={img} 
-                        alt={categoryLabel} 
-                        className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = "https://placehold.co/400x400?text=No+Image";
-                        }}
-                      />
+                      <img src={img} alt={service.title} className="w-full h-48 object-cover" />
                     ) : (
-                      <div className="w-full h-56 bg-stone-200 flex items-center justify-center text-stone-400">
-                        <Image className="h-12 w-12" />
+                      <div className="w-full h-48 bg-stone-200 flex items-center justify-center">
+                        <Utensils className="h-12 w-12 text-stone-300" />
                       </div>
                     )}
-                    {/* ✅ Only category badge - no caption/photographer/date */}
-                    <div className="absolute bottom-3 left-3">
-                      <span className="bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full">
-                        {categoryLabel}
-                      </span>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-stone-800">{service.title}</h3>
+                      <p className="text-emerald-600 font-medium text-sm">{service.subtitle}</p>
+                      <p className="text-stone-600 mt-2 text-sm">{service.description}</p>
+                      <div className="flex items-center gap-4 mt-3 text-sm text-stone-500">
+                        <span><Clock className="inline h-4 w-4 mr-1" /> {service.duration}</span>
+                        <span><CalendarCheck className="inline h-4 w-4 mr-1" /> {service.when}</span>
+                      </div>
+                      <button className="mt-4 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-full transition text-sm">
+                        {service.book_button_text || "Book This Experience"}
+                      </button>
                     </div>
                   </div>
                 );
               })}
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <Image className="h-16 w-16 mx-auto text-stone-300 mb-4" />
-              <p className="text-stone-500">No images in this category.</p>
-              <p className="text-sm text-stone-400">Add images to this category in the editor.</p>
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <Sparkles className="h-16 w-16 mx-auto text-stone-300 mb-4" />
+            <p className="text-stone-500">No services added yet.</p>
+            <p className="text-sm text-stone-400">Add services in the editor to see them here.</p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -265,18 +244,9 @@ function HeroEditor({ data, onChange, onImageUpload, onRemoveImage, isUploading 
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <div>
-            <label className="mb-1.5 block text-sm font-semibold text-stone-700">Title</label>
-            <input type="text" value={data.title || ""} onChange={(e) => onChange("title", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Title..." />
-          </div>
-          <div>
-            <label className="mb-1.5 block text-sm font-semibold text-stone-700">Subtitle</label>
-            <input type="text" value={data.subtitle || ""} onChange={(e) => onChange("subtitle", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Subtitle..." />
-          </div>
-          <div>
-            <label className="mb-1.5 block text-sm font-semibold text-stone-700">Description</label>
-            <textarea value={data.description || ""} onChange={(e) => onChange("description", e.target.value)} rows={3} className="w-full rounded-xl border-2 border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 resize-y transition" placeholder="Description..." />
-          </div>
+          <div><label className="mb-1.5 block text-sm font-semibold text-stone-700">Title</label><input type="text" value={data.title || ""} onChange={(e) => onChange("title", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Title..." /></div>
+          <div><label className="mb-1.5 block text-sm font-semibold text-stone-700">Subtitle</label><input type="text" value={data.subtitle || ""} onChange={(e) => onChange("subtitle", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Subtitle..." /></div>
+          <div><label className="mb-1.5 block text-sm font-semibold text-stone-700">Description</label><textarea value={data.description || ""} onChange={(e) => onChange("description", e.target.value)} rows={3} className="w-full rounded-xl border-2 border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 resize-y transition" placeholder="Description..." /></div>
         </div>
         <ImageDropzone label="Background Image" preview={data.background_image_preview || getImageUrl(data.background_image)} uploading={isUploading(undefined, "background_image")} height="h-48" onUpload={(file) => onImageUpload(file)} onRemove={onRemoveImage} />
       </div>
@@ -284,82 +254,78 @@ function HeroEditor({ data, onChange, onImageUpload, onRemoveImage, isUploading 
   );
 }
 
-// ─── GALLERY IMAGES EDITOR WITH CATEGORIES ──────────────────────────────────
-function GalleryEditor({ data, onChange, onImageUpload, isUploading }) {
-  const categories = data.categories || [
-    { id: "all", label: "All", icon: "📸" },
-    { id: "rooms", label: "Rooms", icon: "🛏️" },
-    { id: "hotel", label: "Hotel", icon: "🏨" },
-    { id: "dining", label: "Dining", icon: "🍽️" },
-    { id: "pool", label: "Pool", icon: "🏊" },
-  ];
-
-  const addImage = () => {
-    const images = [...(data.images || [])];
-    const newId = images.length > 0 ? Math.max(...images.map(i => i.id || 0)) + 1 : 1;
-    images.push({ 
-      id: newId,
-      category: "rooms",
-      image: null,
+// ─── SERVICES LIST EDITOR ──────────────────────────────────────────────────────
+function ServicesListEditor({ data, onChange, onImageUpload, isUploading }) {
+  const addService = () => {
+    const items = [...(data.items || [])];
+    items.push({
+      title: "",
+      subtitle: "",
+      description: "",
+      background_image: null,
+      link: "",
+      duration: "",
+      when: "",
+      level: "All experiences",
+      what_is_included: "",
+      book_button_text: "Book This Experience",
+      book_button_link: "/booking",
     });
-    onChange("images", images);
+    onChange("items", items);
   };
 
-  const removeImage = (index) => {
-    const images = [...(data.images || [])];
-    images.splice(index, 1);
-    onChange("images", images);
+  const removeService = (index) => {
+    const items = [...(data.items || [])];
+    items.splice(index, 1);
+    onChange("items", items);
   };
 
-  const updateImage = (index, field, value) => {
-    const images = [...(data.images || [])];
-    images[index] = { ...images[index], [field]: value };
-    onChange("images", images);
+  const updateService = (index, field, value) => {
+    const items = [...(data.items || [])];
+    items[index] = { ...items[index], [field]: value };
+    onChange("items", items);
   };
 
   return (
     <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4">
+        <div><label className="mb-1.5 block text-sm font-semibold text-stone-700">Title</label><input type="text" value={data.title || ""} onChange={(e) => onChange("title", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Section title..." /></div>
+      </div>
+
       <div>
         <div className="flex items-center justify-between mb-3">
-          <label className="text-sm font-medium text-stone-700">Gallery Images</label>
-          <button onClick={addImage} className="flex items-center gap-1.5 rounded-xl bg-emerald-700 px-3 py-1.5 text-sm text-white hover:bg-emerald-800 transition">
-            <Plus size={14} /> Add Image
-          </button>
+          <label className="text-sm font-medium text-stone-700">Services</label>
+          <button onClick={addService} className="flex items-center gap-1.5 rounded-xl bg-emerald-700 px-3 py-1.5 text-sm text-white hover:bg-emerald-800 transition"><Plus size={14} /> Add Service</button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {(data.images || []).map((image, index) => (
+        <div className="space-y-6">
+          {(data.items || []).map((service, index) => (
             <div key={index} className="relative rounded-xl border-2 border-stone-200 p-4 bg-stone-50 hover:border-emerald-300 transition">
-              <button onClick={() => removeImage(index)} className="absolute top-2 right-2 rounded-full bg-rose-100 p-1 text-rose-500 hover:bg-rose-200 transition z-10">
-                <X size={14} />
-              </button>
-              <div className="space-y-3">
-                <ImageDropzone 
-                  label="Image" 
-                  small 
-                  preview={image.image_preview || getImageUrl(image.image)} 
-                  uploading={isUploading(index, "image")} 
-                  height="h-32" 
-                  onUpload={(file) => onImageUpload(file, index, "image")} 
-                  onRemove={() => updateImage(index, "image", null)} 
-                />
-                
-                {/* Category Selector */}
-                <select 
-                  value={image.category || "rooms"} 
-                  onChange={(e) => updateImage(index, "category", e.target.value)}
-                  className="w-full rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition"
-                >
-                  {categories.filter(c => c.id !== "all").map((cat) => (
-                    <option key={cat.id} value={cat.id}>{cat.icon} {cat.label}</option>
-                  ))}
-                </select>
+              <button onClick={() => removeService(index)} className="absolute top-2 right-2 rounded-full bg-rose-100 p-1 text-rose-500 hover:bg-rose-200 transition"><X size={14} /></button>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <input type="text" value={service.title || ""} onChange={(e) => updateService(index, "title", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Service title" />
+                  <input type="text" value={service.subtitle || ""} onChange={(e) => updateService(index, "subtitle", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Subtitle (e.g., All day · Year round)" />
+                  <textarea value={service.description || ""} onChange={(e) => updateService(index, "description", e.target.value)} rows={2} className="w-full rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 resize-none transition" placeholder="Description" />
+                  <div className="grid grid-cols-2 gap-3">
+                    <input type="text" value={service.duration || ""} onChange={(e) => updateService(index, "duration", e.target.value)} className="rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Duration" />
+                    <input type="text" value={service.when || ""} onChange={(e) => updateService(index, "when", e.target.value)} className="rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="When" />
+                  </div>
+                  <input type="text" value={service.level || ""} onChange={(e) => updateService(index, "level", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Level (e.g., All experiences)" />
+                  <textarea value={service.what_is_included || ""} onChange={(e) => updateService(index, "what_is_included", e.target.value)} rows={2} className="w-full rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 resize-none transition" placeholder="What is included (comma separated)" />
+                  <div className="grid grid-cols-2 gap-2">
+                    <input type="text" value={service.book_button_text || ""} onChange={(e) => updateService(index, "book_button_text", e.target.value)} className="rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="Button text" />
+                    <input type="text" value={service.book_button_link || ""} onChange={(e) => updateService(index, "book_button_link", e.target.value)} className="rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="/booking" />
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <ImageDropzone label="Service Image" small preview={service.background_image_preview || getImageUrl(service.background_image)} uploading={isUploading(index, "background_image")} height="h-32" onUpload={(file) => onImageUpload(file, index, "background_image")} onRemove={() => updateService(index, "background_image", null)} />
+                  <input type="text" value={service.link || ""} onChange={(e) => updateService(index, "link", e.target.value)} className="w-full rounded-xl border-2 border-stone-200 px-3 py-2 text-sm text-stone-800 focus:border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition" placeholder="/link" />
+                </div>
               </div>
             </div>
           ))}
         </div>
-        {(!data.images || data.images.length === 0) && (
-          <p className="text-sm text-stone-400 text-center py-3">No images added. Click "Add Image" to upload.</p>
-        )}
+        {(!data.items || data.items.length === 0) && <p className="text-sm text-stone-400 text-center py-3">No services added. Click "Add Service" to create one.</p>}
       </div>
     </div>
   );
@@ -367,16 +333,16 @@ function GalleryEditor({ data, onChange, onImageUpload, isUploading }) {
 
 const sectionEditors = {
   hero: HeroEditor,
-  gallery: GalleryEditor,
+  services: ServicesListEditor,
 };
 
 const sectionMeta = {
   hero: { label: "Hero", blurb: "Page header", icon: Sun },
-  gallery: { label: "Gallery", blurb: "Image gallery with categories", icon: Image },
+  services: { label: "Services List", blurb: "Service listings", icon: Sparkles },
 };
 
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
-export default function GallerySectionManager() {
+export default function ServicesSectionManager() {
   const [pageData, setPageData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -387,14 +353,14 @@ export default function GallerySectionManager() {
   const [uploading, setUploading] = useState({});
   const [showPreview, setShowPreview] = useState(false);
 
-  useEffect(() => { fetchGalleryPage(); }, []);
+  useEffect(() => { fetchServicesPage(); }, []);
 
-  const fetchGalleryPage = async () => {
+  const fetchServicesPage = async () => {
     setLoading(true);
     try {
       const token = getToken();
       const headers = { Accept: "application/json", ...(token && { Authorization: `Bearer ${token}` }) };
-      const res = await fetch(`${API_URL}/gallery`, { headers });
+      const res = await fetch(`${API_URL}/services`, { headers });
       const result = await res.json();
       
       if (result.success && result.data) {
@@ -404,17 +370,17 @@ export default function GallerySectionManager() {
       } else {
         setPageData({ 
           id: null, 
-          slug: "gallery", 
-          name: "Gallery", 
-          content: DEFAULT_GALLERY_CONTENT, 
-          seo: { title: "Gallery - Akagera Park Inn", description: "Moments captured at Akagera Park Inn.", keywords: "Gallery, Akagera Park Inn" }, 
+          slug: "services", 
+          name: "Services", 
+          content: DEFAULT_SERVICES_CONTENT, 
+          seo: { title: "Services - Akagera Park Inn", description: "Restaurant, pool, laundry and more.", keywords: "Services, Akagera Park Inn" }, 
           is_active: true 
         });
         setExpandedSections({ hero: true });
       }
     } catch (err) { 
       console.error(err); 
-      setError("Failed to load gallery page data"); 
+      setError("Failed to load services page data"); 
     } finally { 
       setLoading(false); 
     }
@@ -444,7 +410,7 @@ export default function GallerySectionManager() {
       const newContent = { ...prev.content };
       const section = { ...newContent[sectionName] };
       if (index !== undefined) {
-        const itemsKey = "images";
+        const itemsKey = "items";
         const items = [...(section[itemsKey] || [])];
         const item = { ...items[index] };
         item[field] = file;
@@ -468,7 +434,7 @@ export default function GallerySectionManager() {
       const newContent = { ...prev.content };
       const section = { ...newContent[sectionName] };
       if (index !== undefined) {
-        const itemsKey = "images";
+        const itemsKey = "items";
         const items = [...(section[itemsKey] || [])];
         if (items[index] && items[index][field + "_preview"]?.startsWith("blob:")) URL.revokeObjectURL(items[index][field + "_preview"]);
         items[index] = { ...items[index], [field]: null, [field + "_preview"]: null };
@@ -509,7 +475,7 @@ export default function GallerySectionManager() {
       formData.append("content", JSON.stringify(cleanContent));
       const isUpdate = Boolean(pageData.id);
       if (isUpdate) formData.append("_method", "PUT");
-      const url = isUpdate ? `${API_URL}/admin/gallery/pages/${pageData.id}` : `${API_URL}/admin/gallery/pages`;
+      const url = isUpdate ? `${API_URL}/admin/services/pages/${pageData.id}` : `${API_URL}/admin/services/pages`;
       const response = await fetch(url, { 
         method: "POST", 
         headers: { 
@@ -523,22 +489,22 @@ export default function GallerySectionManager() {
         setHasChanges(false);
         setSaved(true);
         setTimeout(() => setSaved(false), 3000);
-        await fetchGalleryPage();
+        await fetchServicesPage();
       } else if (result.errors) {
         setError(`Validation Error: ${Object.values(result.errors).flat().join(", ")}`);
       } else {
-        setError(result.message || "Error saving gallery page");
+        setError(result.message || "Error saving services page");
       }
     } catch (err) { 
       console.error(err); 
-      setError(err.message || "Failed to save gallery page"); 
+      setError(err.message || "Failed to save services page"); 
     } finally { 
       setSaving(false); 
     }
   };
 
   const handleReset = () => { 
-    fetchGalleryPage(); 
+    fetchServicesPage(); 
     setHasChanges(false); 
     setError(null); 
   };
@@ -554,8 +520,8 @@ export default function GallerySectionManager() {
   if (!pageData) {
     return (
       <div className="text-center py-24">
-        <p className="text-stone-500">No gallery page data found</p>
-        <button onClick={fetchGalleryPage} className="mt-4 rounded-xl bg-emerald-700 px-4 py-2 text-sm text-white hover:bg-emerald-800 transition">
+        <p className="text-stone-500">No services page data found</p>
+        <button onClick={fetchServicesPage} className="mt-4 rounded-xl bg-emerald-700 px-4 py-2 text-sm text-white hover:bg-emerald-800 transition">
           Retry
         </button>
       </div>
@@ -568,13 +534,12 @@ export default function GallerySectionManager() {
     <div className="min-h-screen bg-stone-100 pb-16">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap');`}</style>
       
-      {/* Header */}
       <div className="sticky top-0 z-20 bg-emerald-950 text-stone-50 shadow-lg shadow-emerald-950/10 rounded-b-3xl border-b-4 border-amber-400">
         <div className="mx-auto max-w-5xl px-6 py-5 flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-emerald-300/80">Akagera Park Inn</p>
             <h1 style={{ fontFamily: "'Fraunces', Georgia, serif" }} className="text-2xl font-semibold text-white">
-              Gallery Manager
+              Services Page Manager
             </h1>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
@@ -616,7 +581,6 @@ export default function GallerySectionManager() {
           </div>
         )}
 
-        {/* Sections */}
         <div className="relative pl-14">
           <div className="absolute left-[27px] top-3 bottom-3 w-px bg-emerald-200" aria-hidden="true" />
           <div className="space-y-4">
@@ -624,7 +588,7 @@ export default function GallerySectionManager() {
               const isExpanded = expandedSections[sectionName] || false;
               const sectionData = pageData.content[sectionName];
               const EditorComponent = sectionEditors[sectionName];
-              const meta = sectionMeta[sectionName] || { label: sectionName, blurb: "", icon: Image };
+              const meta = sectionMeta[sectionName] || { label: sectionName, blurb: "", icon: Compass };
               const Icon = meta.icon;
               if (!EditorComponent || !sectionData) return null;
               return (
@@ -671,25 +635,22 @@ export default function GallerySectionManager() {
           </div>
         </div>
 
-        {/* Tips */}
         <div className="rounded-2xl border-2 border-amber-200 bg-amber-50 p-4">
           <div className="flex gap-3">
             <AlertCircle size={16} className="text-amber-700 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-amber-900">Tips</p>
               <ul className="mt-1 space-y-1 text-xs text-amber-700">
-                <li>• Expand a section to edit just that part</li>
-                <li>• Each image can be assigned to a category (Rooms, Hotel, Dining, Pool)</li>
+                <li>• Expand a waypoint to edit just that section</li>
                 <li>• Uploaded images preview instantly</li>
-                <li>• Click "View Preview" to see how your gallery looks with category filters</li>
+                <li>• Click "View Preview" to see how your page looks</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Preview Modal */}
-      {showPreview && <GalleryPreview data={pageData.content} onClose={closePreview} />}
+      {showPreview && <ServicesPreview data={pageData.content} onClose={closePreview} />}
     </div>
   );
 }
