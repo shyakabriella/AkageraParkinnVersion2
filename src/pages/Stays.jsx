@@ -20,10 +20,10 @@ export default function Stays() {
       gallery: staticSuites.find(s => s.slug === suite.slug)?.gallery,
     }));
     return (<>
-      <PageHeader eyebrow="Rooms" title={<>
-            Comfortable rooms with breakfast included,
-            <span className="italic text-sand-200"> minutes from the park.</span>
-          </>} subtitle="Twin and double rooms. Each includes a full breakfast, free Wi-Fi, air conditioning, and a private balcony with garden or courtyard views." image={suites[0].image}/>
+      <PageHeader eyebrow="Our Rooms" title={<>
+            A Perfect Blend of Comfort
+            <span className="italic text-sand-200"> and Luxury</span>
+          </>} subtitle="We offer a selection of beautifully designed rooms and suites, each thoughtfully crafted to provide comfort, elegance, and a peaceful stay near Akagera National Park." image={suites[0].image}/>
 
       <section className="bg-sand-50 bg-grain py-24 sm:py-32">
         <div className="container-x">

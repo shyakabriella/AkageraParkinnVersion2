@@ -6,10 +6,13 @@ import { looLogo } from '../lib/assets';
 const links = [
   { label: 'About', to: '/about' },
   { label: 'Rooms', to: '/stays' },
-  { label: 'Services', to: '/experiences' },
+  { label: 'Experiences', to: '/experiences' },
+  { label: 'Offers', to: '/offers' },
+  { label: 'Services', to: '/services' },
   { label: 'Restaurant', to: '/restaurant' },
   { label: 'Gallery', to: '/gallery' },
   { label: 'Reviews', to: '/stories' },
+  { label: 'Policies', to: 'https://direct-book.com/properties/akageraparkinn/policies?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=USD&checkInDate=2026-01-03&checkOutDate=2026-01-04&trackPage=yes' },
 ];
 export default function Navbar({ currentPath }) {
   const [scrolled, setScrolled] = useState(false);
@@ -53,7 +56,7 @@ export default function Navbar({ currentPath }) {
         </span>
       </Link>
 
-      <ul className="hidden items-center gap-8 lg:flex">
+      <ul className="hidden items-center gap-4 xl:gap-6 xl:flex">
         {links.map((l) => {
           const active = currentPath === l.to || currentPath.startsWith(`${l.to}/`);
           return (<li key={l.to}>
@@ -65,25 +68,29 @@ export default function Navbar({ currentPath }) {
         })}
       </ul>
 
-      <div className="hidden lg:block">
+      <div className="hidden xl:block">
         <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer" className="btn-primary !py-2.5 !px-6">
           Book Your Stay
         </a>
       </div>
 
-      <button type="button" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((v) => !v)} className="flex h-10 w-10 items-center justify-center rounded-full border border-sand-50/30 text-sand-50 transition-colors hover:border-sand-50 lg:hidden">
+      <button type="button" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((v) => !v)} className="flex h-10 w-10 items-center justify-center rounded-full border border-sand-50/30 text-sand-50 transition-colors hover:border-sand-50 xl:hidden">
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
     </nav>
 
     {/* Mobile drawer */}
-    <div className={`lg:hidden ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+    <div className={`xl:hidden ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
       <div className={`absolute inset-x-0 top-20 origin-top bg-forest-950/95 backdrop-blur-md transition-all duration-300 ${open ? 'opacity-100' : 'opacity-0'}`}>
         <ul className="container-x flex flex-col gap-1 py-6">
-          {links.map((l) => (<li key={l.to}>
+          {links.map((l) => (<li key={l.label}>
             <button type="button" onClick={() => {
               setOpen(false);
-              navigate(l.to);
+              if (l.to.startsWith('http')) {
+                window.open(l.to, '_blank');
+              } else {
+                navigate(l.to);
+              }
             }} className="block w-full border-b border-sand-50/10 py-4 text-left font-display text-2xl text-sand-100">
               {l.label}
             </button>

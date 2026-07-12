@@ -13,10 +13,10 @@ export default function FeaturedExperiences() {
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
-            <p className="eyebrow !text-sand-300/80 reveal">Services</p>
+            <p className="eyebrow !text-sand-300/80 reveal">Experience</p>
             <h2 className="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl">
-              Restaurant, pool, laundry
-              <span className="italic text-sand-200"> and more.</span>
+              Discover culture, storytelling,
+              <span className="italic text-sand-200"> music, dance, and more.</span>
             </h2>
           </div>
           <Link to="/experiences" className="reveal group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-sand-50 hover:text-sand-200">

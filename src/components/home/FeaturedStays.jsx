@@ -21,10 +21,10 @@ export default function FeaturedStays() {
       <div className="container-x">
         <div className="flex flex-col items-center justify-center gap-6 text-center">
           <div className="max-w-2xl">
-            <p className="eyebrow reveal">Rooms</p>
+            <p className="eyebrow reveal">Our Rooms</p>
             <h2 className="reveal mt-5 font-display text-4xl font-medium leading-tight text-forest-950 sm:text-5xl">
-              Comfortable rooms with breakfast included,
-              <span className="block italic text-forest-700"> near Akagera National Park.</span>
+              A Perfect Blend of Comfort
+              <span className="block italic text-forest-700"> and Luxury</span>
             </h2>
           </div>
           <Link to="/stays" className="reveal group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-forest-800 hover:text-forest-600">

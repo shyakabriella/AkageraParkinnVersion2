@@ -57,13 +57,15 @@ export default function Hero() {
           </p>
 
           <h1 className="mt-6 font-display text-5xl font-medium leading-[1.05] text-sand-50 opacity-0 animate-fade-in-up sm:text-6xl lg:text-7xl" style={{ animationDelay: '0.25s' }}>
-            {hero?.headline || 'Welcome back to'}
-            <br />
-            <span className="italic text-sand-200">{cms?.name || site.name}.</span>
+            {hero?.headline || site.name}
           </h1>
 
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-sand-100/85 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.45s' }}>
+          <p className="mt-7 max-w-xl text-2xl font-display text-sand-200 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
             {hero?.subtitle || site.tagline}
+          </p>
+
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-sand-100/85 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.45s' }}>
+            {cms?.description || site.description}
           </p>
 
           <div className="mt-10 flex flex-col gap-4 opacity-0 animate-fade-in-up sm:flex-row sm:items-center" style={{ animationDelay: '0.65s' }}>
