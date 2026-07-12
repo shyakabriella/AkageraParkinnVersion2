@@ -10,6 +10,13 @@ export function NavProvider({ children }) {
 }
 
 export function Link({ to, children, ...rest }) {
+    if (to && to.startsWith('http')) {
+        return (
+            <a href={to} target="_blank" rel="noopener noreferrer" {...rest}>
+                {children}
+            </a>
+        );
+    }
     return (
         <RouterLink to={to} {...rest}>
             {children}

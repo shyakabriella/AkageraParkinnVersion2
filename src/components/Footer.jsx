@@ -13,6 +13,7 @@ const columns = [
             { label: 'Restaurant', to: '/restaurant' },
             { label: 'Gallery', to: '/gallery' },
             { label: 'Reviews', to: '/stories' },
+            { label: 'Policies', to: 'https://direct-book.com/properties/akageraparkinn/policies?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=USD&checkInDate=2026-01-03&checkOutDate=2026-01-04&trackPage=yes' },
         ],
     },
     {
