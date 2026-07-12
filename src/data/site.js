@@ -1,8 +1,7 @@
 export const site = {
     name: 'Akagera Park Inn',
-    tagline: 'Near Akagera National Park • Calm stays • Pool & garden',
-    subtitle: '',
-    description: 'A peaceful  hotel in Akagera Village, minutes from Akagera National Park. Calm stays with an outdoor pool, garden, restaurant & lounge, and warm Rwandan hospitality.',
+    tagline: 'Rest at the edge of the wild.',
+    description: 'Nestled beside Akagera National Park, our inn is a haven of comfort, culture, and sustainability—where every stay supports nature and celebrates local heritage.',
     address: '3MGF+4HF Akagera Village, Akagera, Rwanda',
     region: 'Eastern Province · Rwanda',
     phones: ['+250 788 471 880', '+250 793 842 491'],

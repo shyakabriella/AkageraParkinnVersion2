@@ -7,9 +7,12 @@ const columns = [
         links: [
             { label: 'About Us', to: '/about' },
             { label: 'Rooms', to: '/stays' },
-            { label: 'Services', to: '/experiences' },
+            { label: 'Experiences', to: '/experiences' },
+            { label: 'Offers', to: '/offers' },
+            { label: 'Services', to: '/services' },
             { label: 'Restaurant', to: '/restaurant' },
             { label: 'Gallery', to: '/gallery' },
+            { label: 'Reviews', to: '/stories' },
         ],
     },
     {

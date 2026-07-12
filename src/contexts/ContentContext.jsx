@@ -7,7 +7,7 @@ import { testimonials as staticTestimonials } from '../data/testimonials';
 import { faqs as staticFaqs } from '../data/pages';
 import { galleryImages as staticGallery } from '../data/gallery';
 
-const STORAGE_KEY = 'akagera_cms_v1';
+const STORAGE_KEY = 'akagera_cms_v2';
 const ContentContext = createContext(null);
 
 /** Build the default content object from static data files */
@@ -31,13 +31,13 @@ function buildDefaults() {
       distAirport: S.distances.kigaliAirport,
     },
     hero: {
-      headline: 'Welcome back to',
-      subtitle: `${S.tagline}. Experience local culture, heritage, and unforgettable moments at our hotel minutes from Akagera National Park.`,
+      headline: 'AKAGERA PARK INN',
+      subtitle: S.tagline,
     },
     about: {
-      heading: 'A peaceful hotel minutes from Akagera National Park.',
-      p1: `${S.name} is located at ${S.address}, in the heart of Akagera Village. We are a short drive from the Akagera National Park South Entrance — making us an ideal base for safari days and restful evenings alike.`,
-      p2: `Our ${S.roomCount} rooms feature handcrafted wooden furniture, private balconies, air conditioning, smart TVs, and complimentary high-speed Wi-Fi. Every room booking includes a full breakfast for registered guests.`,
+      heading: 'Comfortable base near the park',
+      p1: 'Akagera Park Inn is a cozy boutique hotel located just steps from the gates of Akagera National Park—Rwanda’s iconic wildlife destination. Blending modern comfort with traditional Rwandan charm, our hotel offers guests an authentic yet relaxing base for exploring the park’s breathtaking savannahs, lakes, and rolling hills.',
+      p2: `Our rooms are spacious, serene, and thoughtfully designed with handcrafted wood furnishings and natural tones that reflect the beauty of our surroundings. Whether you choose a double or twin room, each space is equipped with modern amenities like Wi-Fi, air conditioning, and private bathrooms to ensure a restful stay after a day of adventure.`,
       p3: `Beyond accommodation, we offer a restaurant & lounge, bar, outdoor pool, and laundry service — all bookable with or without a room. Check-in and check-out are from ${S.checkIn} to ${S.checkOut}, with ${S.reception.toLowerCase()}.`,
     },
     // Images are stripped — public pages re-merge with static image imports

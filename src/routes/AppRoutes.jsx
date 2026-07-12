@@ -14,6 +14,9 @@ import Book from "../pages/Book";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
+import Offers from "../pages/Offers";
+import OfferDetail from "../pages/OfferDetail";
+import Services from "../pages/Services";
 
 const SuiteDetailWrapper = () => {
   const { slug } = useParams();
@@ -43,6 +46,9 @@ export default function AppRoutes() {
         <Route path="dining" element={<Dining />} />
         <Route path="restaurant" element={<Dining />} />
         <Route path="gallery" element={<Gallery />} />
+        <Route path="offers" element={<Offers />} />
+        <Route path="offers/:id" element={<OfferDetail />} />
+        <Route path="services" element={<Services />} />
         <Route path="stories" element={<Stories />} />
         <Route path="book" element={<Book />} />
         <Route path="*" element={<NotFound />} />

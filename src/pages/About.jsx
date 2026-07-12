@@ -42,9 +42,9 @@ export default function About() {
     const about = content.about;
     return (<>
       <PageHeader eyebrow="About Us" title={<>
-            Experience local culture,
-            <span className="italic text-sand-200"> heritage, and unforgettable moments.</span>
-          </>} subtitle={cms?.description || site.description} image={about?.customHeroImage || nightView}/>
+            Comfortable base
+            <span className="italic text-sand-200"> near the park</span>
+          </>} subtitle="Rest in bright rooms, enjoy our restaurant & bar, and access the park easily with friendly on-site support." image={about?.customHeroImage || nightView}/>
 
       <section className="bg-sand-50 bg-grain py-24 sm:py-32">
         <div className="container-x">
