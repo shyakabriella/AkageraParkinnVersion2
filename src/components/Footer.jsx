@@ -49,17 +49,9 @@ export default function Footer() {
       <div className="container-x py-16">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link to="/" className="flex items-center gap-4">
+            <Link to="/" className="flex items-center">
               <span className="flex items-center justify-center">
-                <img src={looLogo} alt="Akagera Park Inn logo" className="h-16 w-auto object-contain"/>
-              </span>
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-xl font-semibold text-sand-50">
-                  {site.name}
-                </span>
-                <span className="text-[10px] uppercase tracking-widest text-sand-200/60">
-                  {site.subtitle}
-                </span>
+                <img src={looLogo} alt="Akagera Park Inn logo" className="h-24 w-auto object-contain"/>
               </span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed">

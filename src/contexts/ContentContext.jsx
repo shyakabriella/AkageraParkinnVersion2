@@ -31,12 +31,12 @@ function buildDefaults() {
       distAirport: S.distances.kigaliAirport,
     },
     hero: {
-      headline: 'AKAGERA PARK INN',
+      headline: '',
       subtitle: S.tagline,
     },
     about: {
       heading: 'Comfortable base near the park',
-      p1: 'Akagera Park Inn is a cozy boutique hotel located just steps from the gates of Akagera National Park—Rwanda’s iconic wildlife destination. Blending modern comfort with traditional Rwandan charm, our hotel offers guests an authentic yet relaxing base for exploring the park’s breathtaking savannahs, lakes, and rolling hills.',
+      p1: ' is a cozy boutique hotel located just steps from the gates of Akagera National Park—Rwanda’s iconic wildlife destination. Blending modern comfort with traditional Rwandan charm, our hotel offers guests an authentic yet relaxing base for exploring the park’s breathtaking savannahs, lakes, and rolling hills.',
       p2: `Our rooms are spacious, serene, and thoughtfully designed with handcrafted wood furnishings and natural tones that reflect the beauty of our surroundings. Whether you choose a double or twin room, each space is equipped with modern amenities like Wi-Fi, air conditioning, and private bathrooms to ensure a restful stay after a day of adventure.`,
       p3: `Beyond accommodation, we offer a restaurant & lounge, bar, outdoor pool, and laundry service — all bookable with or without a room. Check-in and check-out are from ${S.checkIn} to ${S.checkOut}, with ${S.reception.toLowerCase()}.`,
     },

@@ -41,18 +41,10 @@ export default function Navbar({ currentPath }) {
   return (<header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${solid
     ? 'bg-forest-950/85 text-sand-50 backdrop-blur-md shadow-soft'
     : 'bg-transparent text-sand-50'}`}>
-    <nav className="container-x flex h-20 items-center justify-between">
-      <Link to="/" className="group flex items-center gap-4" aria-label="Akagera Park Inn — home">
+    <nav className="container-x flex h-28 items-center justify-between">
+      <Link to="/" className="group flex items-center" aria-label="Akagera Park Inn — home">
         <span className={`flex items-center justify-center transition-colors duration-300 ${solid ? 'border-sand-50/30' : 'border-sand-50/40'} group-hover:border-sand-50`}>
-          <img src={looLogo} alt="Akagera Park Inn logo" className="h-16 w-auto object-contain" />
-        </span>
-        <span className="flex flex-col leading-none">
-          <span className="font-display text-xl font-semibold tracking-wide">
-            {site.name}
-          </span>
-          <span className="text-[10px] uppercase tracking-widest text-sand-200/80">
-            {site.subtitle}
-          </span>
+          <img src={looLogo} alt="Akagera Park Inn logo" className="h-24 w-auto object-contain" />
         </span>
       </Link>
 

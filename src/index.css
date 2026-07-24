@@ -19,26 +19,26 @@
     @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12;
   }
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-forest-600;
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-sand-700;
   }
   .eyebrow::before {
     content: '';
-    @apply h-px w-8 bg-forest-500/60;
+    @apply h-px w-8 bg-sand-600/60;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest-700 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-sand-50 transition-all duration-300 hover:bg-forest-800 hover:shadow-xl hover:shadow-forest-900/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-sand-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-sand-700 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-sand-50 transition-all duration-300 hover:bg-sand-800 hover:shadow-xl hover:shadow-sand-900/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-sand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-sand-50;
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-sand-50/40 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-sand-50 transition-all duration-300 hover:border-sand-50 hover:bg-sand-50/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sand-50/60;
   }
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-forest-700/30 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-forest-800 transition-all duration-300 hover:border-forest-700 hover:bg-forest-700 hover:text-sand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-sand-700/30 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-sand-800 transition-all duration-300 hover:border-sand-700 hover:bg-sand-700 hover:text-sand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sand-500;
   }
   .field {
-    @apply w-full rounded-xl border border-forest-900/10 bg-sand-50/60 px-4 py-3 text-sm text-forest-950 placeholder-forest-700/40 transition-all duration-200 focus:border-forest-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-forest-500/30;
+    @apply w-full rounded-xl border border-forest-900/10 bg-sand-50/60 px-4 py-3 text-sm text-forest-950 placeholder-forest-700/40 transition-all duration-200 focus:border-sand-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sand-500/30;
   }
   .field-label {
-    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-forest-700/80;
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-sand-700/80;
   }
 }
 
