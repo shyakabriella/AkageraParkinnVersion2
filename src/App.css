@@ -1,0 +1,232 @@
+/* =========================================
+   AKAGERA PARK INN — Hostily index-3 Design
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap');
+
+:root {
+  /* Core palette — Hostily index-3 */
+  --body-font: 'Lato', sans-serif;
+  --heading-font: 'Bai Jamjuree', sans-serif;
+
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Primary gold — Hostily #B89146 */
+  --primary-color: #B89146;
+  --brand-gold: #B89146;
+
+  /* Dark headings */
+  --heading-color: #0E1317;
+  --body-color: #333334;
+
+  /* Grays */
+  --color-1: #666667;
+  --color-2: #999999;
+  --color-3: #CCCCCC;
+  --color-4: #F7F7F7;
+  --color-5: #EDECE7;
+
+  /* Dark backgrounds */
+  --color-6: #141C21;
+  --color-7: #262B2E;
+  --color-8: #3E4245;
+  --color-9: #8A8A8A;
+
+  --bg-darker: #141C21;
+  --bg-overlay: rgba(14, 19, 23, 0.95);
+  --text-main: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.65);
+
+  /* Borders */
+  --border-color-1: #373939;
+  --border-color-2: #E7E7E8;
+
+  /* Shadows */
+  --box-shadow-1: 0px 10px 50px rgba(0, 0, 0, 0.06);
+  --box-shadow-2: 0px 10px 50px rgba(0, 0, 0, 0.12);
+
+  /* Transitions */
+  --transition: all 0.4s ease;
+  --radius-sm: 2px;
+  --radius-lg: 4px;
+}
+
+/* ─── Global Reset ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  color: var(--body-color);
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 400;
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  transition: all 0.4s ease-out;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+a:hover {
+  color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 700; }
+h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 500; }
+h3 { font-size: 1.875rem; font-weight: 500; }
+h4 { font-size: 1.5rem; font-weight: 500; }
+h5 { font-size: 1.25rem; font-weight: 500; }
+h6 { font-size: 1.125rem; font-weight: 500; }
+
+ul { list-style: none; }
+
+/* ─── Theme Buttons ─── */
+.theme-btn {
+  background: var(--primary-color);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  padding: 14px 36px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 100%;
+  background: var(--heading-color);
+  transition: all 0.5s ease;
+  z-index: -1;
+  opacity: 0;
+}
+
+.theme-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 0; height: 100%;
+  background: var(--heading-color);
+  transition: all 0.5s ease;
+  z-index: -1;
+  opacity: 0;
+}
+
+.theme-btn:hover { color: var(--white); }
+.theme-btn:hover::before,
+.theme-btn:hover::after { width: 50%; opacity: 1; }
+
+.theme-border-btn {
+  color: var(--primary-color);
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  padding: 13px 35px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-border-btn:hover {
+  color: var(--white);
+  background: var(--primary-color);
+}
+
+/* ─── Subtitle ─── */
+.subtitle__one {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: capitalize;
+  margin-bottom: 8px;
+  font-family: var(--heading-font);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/* ─── Section Padding ─── */
+.section-padding {
+  padding: 100px 0;
+}
+
+/* ─── Container ─── */
+.hly-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ─── Scroll to Top Button ─── */
+.scroll-up-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.scroll-up-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}

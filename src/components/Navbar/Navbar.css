@@ -1,0 +1,274 @@
+/* =========================================
+   HOSTILY index-3 — Navbar + Sidebar
+   ========================================= */
+
+/* ─── Header ─── */
+.hly-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  background: transparent;
+}
+
+.hly-header.scrolled {
+  background: rgba(14, 19, 23, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+}
+
+.hly-header-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ─── Logo ─── */
+.hly-logo {
+  display: flex;
+  align-items: center;
+}
+
+.hly-logo a {
+  display: flex;
+  align-items: center;
+}
+
+.hly-logo-img {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+}
+
+.hly-header.scrolled .hly-logo-img {
+  filter: brightness(0) invert(1);
+}
+
+/* ─── Right side controls ─── */
+.hly-header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Location text */
+.hly-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.82rem;
+  font-family: var(--body-font);
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.hly-location:hover {
+  color: var(--primary-color);
+}
+
+.hly-location svg {
+  flex-shrink: 0;
+  color: var(--primary-color);
+}
+
+/* ─── Hamburger Button ─── */
+.hly-menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.hly-menu-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+.hly-menu-btn:hover .hly-menu-bar {
+  background-color: var(--primary-color);
+}
+
+/* ─── Sidebar Overlay ─── */
+.hly-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 1099;
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+.hly-overlay.active {
+  background: rgba(0, 0, 0, 0.65);
+  pointer-events: all;
+}
+
+/* ─── Sidebar Panel ─── */
+.hly-sidebar {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 380px;
+  max-width: 90vw;
+  height: 100vh;
+  background: var(--heading-color);
+  color: #fff;
+  z-index: 1100;
+  padding: 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow-y: auto;
+}
+
+.hly-sidebar.open {
+  right: 0;
+}
+
+/* Close button */
+.hly-sidebar-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hly-sidebar-close:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Sidebar logo */
+.hly-sidebar-logo {
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hly-sidebar-logo img {
+  height: 56px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+/* Nav links */
+.hly-sidebar-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hly-sidebar-nav li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.hly-sidebar-nav a {
+  display: block;
+  padding: 1.1rem 0;
+  font-family: var(--heading-font);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s ease;
+}
+
+.hly-sidebar-nav a:hover {
+  color: var(--primary-color);
+  padding-left: 8px;
+}
+
+/* Sidebar footer */
+.hly-sidebar-footer {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.hly-sidebar-socials {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.hly-sidebar-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+}
+
+.hly-sidebar-socials a:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .hly-header-inner {
+    padding: 0 1.25rem;
+    height: 72px;
+  }
+
+  .hly-logo-img {
+    height: 50px;
+  }
+
+  .hly-location {
+    display: none;
+  }
+
+  .hly-header-right {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hly-sidebar {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}
