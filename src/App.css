@@ -230,3 +230,25 @@ ul { list-style: none; }
   visibility: visible;
   transform: translateY(0);
 }
+
+/* ─── Section Intro Paragraph (replaces misused h2) ─── */
+.hly-section-intro {
+  max-width: 800px;
+  margin: 0.75rem auto 0;
+  font-size: 1.05rem;
+  color: var(--color-1);
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+/* ─── Scroll Reveal Animations ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}

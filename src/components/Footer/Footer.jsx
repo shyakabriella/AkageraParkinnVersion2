@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -7,7 +6,6 @@ const Footer = () => {
       <div className="hly-container">
         <div className="hly-footer-grid">
 
-          
           <div className="hly-footer-brand">
             <div className="hly-footer-logo">
               <img src="/loo.png" alt="Akagera Park Inn" />
@@ -26,13 +24,12 @@ const Footer = () => {
             </div>
           </div>
 
-          
           <div className="hly-footer-col">
             <h5>Information</h5>
             <ul className="hly-footer-contact">
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <a href="#">Kayonza, Eastern Province, Rwanda</a>
+                <a href="https://maps.google.com/?q=Akagera+Park+Inn,+Kayonza,+Rwanda" target="_blank" rel="noopener noreferrer">Kayonza, Eastern Province, Rwanda</a>
               </li>
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -45,7 +42,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          
           <div className="hly-footer-col">
             <h5>Quick Links</h5>
             <ul className="hly-footer-links">
@@ -55,16 +51,17 @@ const Footer = () => {
               <li><Link to="/experiences">Experiences</Link></li>
               <li><Link to="/offers">Offers</Link></li>
               <li><Link to="/services">Services</Link></li>
+              <li><Link to="/restaurant">Restaurant</Link></li>
             </ul>
           </div>
 
-          
           <div className="hly-footer-col">
             <h5>Subscribe</h5>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', marginBottom: '1.2rem' }}>Get updates on offers and events at Akagera Park Inn.</p>
             <div className="hly-subscribe-form">
-              <input type="email" placeholder="Email Address" />
-              <button type="button" aria-label="Subscribe">
+              <label htmlFor="footer-email" style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0,0,0,0)' }}>Email Address</label>
+              <input id="footer-email" name="email" type="email" placeholder="Email Address" aria-label="Email address for newsletter" />
+              <button type="button" aria-label="Subscribe to newsletter">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               </button>
             </div>
@@ -73,10 +70,9 @@ const Footer = () => {
         </div>
       </div>
 
-      
       <div className="hly-footer-bottom">
         <div className="hly-container">
-          <p>© 2026 Akagera Park Inn — All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Akagera Park Inn — All rights reserved.</p>
         </div>
       </div>
     </footer>

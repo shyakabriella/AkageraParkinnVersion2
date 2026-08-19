@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePageInit } from '../../hooks/usePageInit';
 
 const Offers = () => {
@@ -13,7 +12,7 @@ const Offers = () => {
           <div className="hly-cta-inner" style={{ justifyContent: 'center', textAlign: 'center', paddingTop: '150px', paddingBottom: '120px' }}>
             <div className="hly-cta-left">
               <span className="hly-banner-subtitle" style={{ color: '#B89146', letterSpacing: '4px', textTransform: 'uppercase', fontWeight: 600, display: 'block', marginBottom: '1rem' }}>Specials</span>
-              <h1 className="hly-banner-title" style={{ marginBottom: 0 }}>Offers & Packages</h1>
+              <h1 className="hly-banner-title" style={{ marginBottom: 0 }}>Offers &amp; Packages</h1>
             </div>
           </div>
         </div>
@@ -25,23 +24,24 @@ const Offers = () => {
           <div className="hly-section-header" style={{ justifyContent: 'center', textAlign: 'center' }}>
             <div>
               <span className="hly-banner-subtitle" style={{ color: '#B89146' }}>Exclusive Offers</span>
-              <h2 style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.2rem', color: '#666667', fontWeight: 400, lineHeight: 1.8 }}>
+              {/* Fix: was h2 — descriptive intro text should be a <p> */}
+              <p className="hly-section-intro">
                 Take advantage of our exclusive offers at <strong>Akagera Park Inn</strong> and make your getaway even more enjoyable. From discounted stays to curated experience packages, our special deals give you great value while enjoying the exceptional services and unique activities we offer.
-              </h2>
+              </p>
             </div>
           </div>
 
           <div className="hly-rooms-grid" style={{ gap: '2.5rem' }}>
-            
+
             {/* Offer 1 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/ro.jpg" alt="Romantic Escape Package" loading="lazy" />
+                <img src="/img/ro.jpg" alt="Romantic Escape Package — dinner for two with candles" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <span className="hly-room-price">Valid: Year-round</span>
                 <h4>Romantic Escape Package</h4>
-                <p>Dinner for two, a bottle of wine, room upgrade, and a couple’s massage for a memorable stay.</p>
+                <p>Dinner for two, a bottle of wine, room upgrade, and a couple&apos;s massage for a memorable stay.</p>
                 <div className="hly-room-footer" style={{ borderTop: 'none', paddingTop: '0' }}>
                   <a className="hly-read-more" href="https://direct-book.com/properties/akageraparkinn?locale=en" target="_blank" rel="noopener noreferrer">Learn More</a>
                 </div>
@@ -51,7 +51,7 @@ const Offers = () => {
             {/* Offer 2 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/1.jpg" alt="Stay 3, Pay 2 Offer" loading="lazy" />
+                <img src="/img/1.jpg" alt="Stay 3 Pay 2 — Akagera Park Inn exterior" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <span className="hly-room-price">Valid: Year-round</span>
@@ -66,7 +66,7 @@ const Offers = () => {
             {/* Offer 3 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/we.png" alt="Weekend Getaway Special" loading="lazy" />
+                <img src="/img/we.png" alt="Weekend Getaway Special — relaxing weekend retreat" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <span className="hly-room-price">Valid: Every weekend</span>

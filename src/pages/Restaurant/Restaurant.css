@@ -1,0 +1,723 @@
+/* =========================================
+   RESTAURANT PAGE — Akagera Park Inn
+   ========================================= */
+
+/* ─── Restaurant Hero ─── */
+.rest-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 480px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.rest-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(14, 19, 23, 0.5) 0%,
+    rgba(14, 19, 23, 0.72) 100%
+  );
+}
+
+.rest-hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding: 0 1.5rem;
+}
+
+.rest-tag {
+  display: inline-block;
+  color: var(--primary-color);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  font-family: var(--heading-font);
+}
+
+.rest-hero-content h1 { color: #fff; margin-bottom: 1rem; }
+.rest-hero-content p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+}
+
+/* ─── Info Strip ─── */
+.rest-intro-strip {
+  background: var(--primary-color);
+  padding: 1.2rem 2rem;
+}
+
+.rest-intro-strip-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.rest-intro-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  font-family: var(--heading-font);
+  text-transform: uppercase;
+}
+
+/* ─── Menu Section ─── */
+.rest-menu-section {
+  background: var(--color-4);
+  padding: 80px 0 100px;
+}
+
+/* ─── Tabs ─── */
+.rest-menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--border-color-2);
+  flex-wrap: wrap;
+}
+
+.rest-menu-tab {
+  background: none;
+  border: none;
+  padding: 0.85rem 1.8rem;
+  font-family: var(--heading-font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-1);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.rest-menu-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.35s ease;
+}
+
+.rest-menu-tab.active { color: var(--heading-color); }
+.rest-menu-tab.active::after { width: 100%; }
+.rest-menu-tab:hover { color: var(--primary-color); }
+
+/* ─── Cards Grid ─── */
+.rest-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+
+/* ─── Menu Card ─── */
+.rest-card {
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+}
+
+.rest-card-img {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.rest-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.rest-card:hover .rest-card-img img {
+  transform: scale(1.06);
+}
+
+.rest-card-badge {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-family: var(--heading-font);
+}
+
+.rest-card-body {
+  padding: 1.2rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.rest-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.rest-card-top h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.rest-card-price {
+  font-family: var(--heading-font);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rest-card-body p {
+  font-size: 0.86rem;
+  color: var(--color-1);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.rest-card-actions {
+  margin-top: 0.6rem;
+}
+
+/* Add to Order button */
+.rest-add-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: var(--heading-color);
+  color: #fff;
+  border: none;
+  font-family: var(--heading-font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.25s ease;
+}
+
+.rest-add-btn:hover {
+  background: var(--primary-color);
+}
+
+/* Quantity controls */
+.rest-qty-ctrl {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--primary-color);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rest-qty-btn {
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.rest-qty-btn:hover { background: var(--primary-color); color: #fff; }
+
+.rest-qty-count {
+  flex: 1;
+  text-align: center;
+  font-family: var(--heading-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  min-width: 32px;
+}
+
+/* ─── Floating Order Button ─── */
+.rest-float-btn {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 2rem;
+  background: var(--heading-color);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--heading-font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(14,19,23,0.45);
+  transition: transform 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  animation: slideUp 0.35s ease;
+}
+
+.rest-float-btn:hover {
+  background: var(--primary-color);
+  transform: translateX(-50%) translateY(-2px);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (min-width: 1024px) {
+  .rest-float-btn { bottom: 30px; }
+}
+
+.rest-float-icon {
+  position: relative;
+  display: flex;
+}
+
+.rest-float-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rest-float-btn:hover .rest-float-badge {
+  background: #fff;
+  color: var(--primary-color);
+}
+
+/* ─── Order Overlay ─── */
+.rest-overlay-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 19, 23, 0.75);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (min-width: 640px) {
+  .rest-overlay-bg { align-items: center; }
+}
+
+.rest-order-panel {
+  background: #fff;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px 12px 0 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: slideUpPanel 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .rest-order-panel { border-radius: 12px; }
+}
+
+@keyframes slideUpPanel {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.rest-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rest-order-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.rest-order-close {
+  background: rgba(0,0,0,0.06);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.rest-order-close:hover { background: rgba(0,0,0,0.12); }
+
+/* Order items list */
+.rest-order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.rest-order-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem;
+  background: var(--color-4);
+  border-radius: 6px;
+}
+
+.rest-order-item img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.rest-order-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rest-order-item-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.4rem;
+}
+
+.rest-order-item-qty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rest-order-item-qty button {
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border: 1px solid var(--border-color-2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--heading-color);
+  transition: all 0.2s ease;
+}
+
+.rest-order-item-qty button:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.rest-order-item-qty span {
+  font-weight: 700;
+  font-size: 0.9rem;
+  min-width: 20px;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.rest-order-item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.rest-order-item-price {
+  font-family: var(--heading-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.rest-order-item-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  padding: 2px;
+  transition: color 0.2s ease;
+}
+
+.rest-order-item-remove:hover { color: #ef4444; }
+
+/* Order total */
+.rest-order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 2px solid var(--border-color-2);
+  font-family: var(--heading-font);
+}
+
+.rest-order-total span { font-size: 0.9rem; color: var(--color-1); text-transform: uppercase; letter-spacing: 1px; }
+.rest-order-total strong { font-size: 1.3rem; color: var(--heading-color); }
+
+/* Guest detail fields */
+.rest-order-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.rest-order-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rest-order-field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--color-1);
+  font-family: var(--heading-font);
+}
+
+.rest-order-field input {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-color-2);
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+  color: var(--heading-color);
+  outline: none;
+  transition: border-color 0.25s ease;
+  border-radius: 2px;
+}
+
+.rest-order-field input:focus { border-color: var(--primary-color); }
+
+/* Order action buttons */
+.rest-order-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.rest-addmore-btn {
+  flex: 1;
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: none;
+  border: 2px solid var(--border-color-2);
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.rest-addmore-btn:hover {
+  border-color: var(--heading-color);
+  background: var(--heading-color);
+  color: #fff;
+}
+
+.rest-place-btn {
+  flex: 2;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  font-family: var(--heading-font);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.25s ease;
+}
+
+.rest-place-btn:hover { background: #1da851; }
+
+/* ─── Confirmed Panel ─── */
+.rest-confirmed-panel {
+  text-align: center;
+  align-items: center;
+  padding: 3rem 2rem;
+}
+
+.rest-confirmed-icon {
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.rest-confirmed-panel h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.rest-confirmed-panel p { color: var(--color-1); max-width: 340px; line-height: 1.7; }
+
+/* ─── Hours Section ─── */
+.rest-hours-section {
+  padding: 80px 0;
+  background: var(--heading-color);
+  color: #fff;
+}
+
+.rest-hours-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.rest-hours-block h3,
+.rest-reservation-block h3 {
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.rest-hours-subtitle {
+  color: var(--primary-color);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--heading-font);
+}
+
+.rest-hours-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rest-hours-table tr { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.rest-hours-table td {
+  padding: 0.85rem 0;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.rest-hours-table td:last-child {
+  text-align: right;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-family: var(--heading-font);
+}
+
+.rest-reservation-block p {
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1100px) {
+  .rest-cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .rest-cards-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .rest-hours-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .rest-order-fields { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .rest-menu-tab { padding: 0.7rem 1rem; font-size: 0.78rem; }
+  .rest-order-panel { padding: 1.5rem; }
+  .rest-cards-grid { max-width: 100%; }
+}

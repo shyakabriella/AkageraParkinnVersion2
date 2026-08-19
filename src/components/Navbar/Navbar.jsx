@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ sidebarOpen, onToggleSidebar, onCloseSidebar }) => {
   const [scrolled, setScrolled] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Use internal state if no external control provided (backward compat)
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = sidebarOpen !== undefined ? sidebarOpen : internalOpen;
+  const toggleSidebar = onToggleSidebar ?? (() => setInternalOpen(prev => !prev));
+  const closeSidebar = onCloseSidebar ?? (() => setInternalOpen(false));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,18 +19,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleSidebar = () => setSidebarOpen(prev => !prev);
-  const closeSidebar = () => setSidebarOpen(false);
-
   // Lock body scroll when sidebar is open
   useEffect(() => {
-    if (sidebarOpen) {
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [sidebarOpen]);
+  }, [isOpen]);
 
   return (
     <>
@@ -55,7 +57,7 @@ const Navbar = () => {
               className="hly-menu-btn"
               onClick={toggleSidebar}
               aria-label="Open menu"
-              aria-expanded={sidebarOpen}
+              aria-expanded={isOpen}
             >
               <span className="hly-menu-bar" />
               <span className="hly-menu-bar" />
@@ -67,13 +69,13 @@ const Navbar = () => {
 
       {/* Sidebar Overlay */}
       <div
-        className={`hly-overlay${sidebarOpen ? ' active' : ''}`}
+        className={`hly-overlay${isOpen ? ' active' : ''}`}
         onClick={closeSidebar}
         aria-hidden="true"
       />
 
       {/* Sidebar Panel */}
-      <aside className={`hly-sidebar${sidebarOpen ? ' open' : ''}`} aria-label="Navigation menu">
+      <aside className={`hly-sidebar${isOpen ? ' open' : ''}`} aria-label="Navigation menu">
 
         {/* Close Button */}
         <button className="hly-sidebar-close" onClick={closeSidebar} aria-label="Close menu">
@@ -97,14 +99,14 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="https://direct-book.com/properties/akageraparkinn/about?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=USD&checkInDate=2026-01-03&checkOutDate=2026-01-04&trackPage=yes"
+                href="https://direct-book.com/properties/akageraparkinn/about?locale=en"
                 target="_blank" rel="noopener noreferrer"
                 onClick={closeSidebar}
               >About</a>
             </li>
             <li>
               <a
-                href="https://direct-book.com/properties/akageraparkinn?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=USD&checkInDate=2026-01-03&checkOutDate=2026-01-04&trackPage=yes"
+                href="https://direct-book.com/properties/akageraparkinn?locale=en"
                 target="_blank" rel="noopener noreferrer"
                 onClick={closeSidebar}
               >Rooms</a>
@@ -122,8 +124,11 @@ const Navbar = () => {
               <Link to="/services" onClick={closeSidebar}>Services</Link>
             </li>
             <li>
+              <Link to="/restaurant" onClick={closeSidebar}>Restaurant</Link>
+            </li>
+            <li>
               <a
-                href="https://direct-book.com/properties/akageraparkinn/policies?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=USD&checkInDate=2026-01-03&checkOutDate=2026-01-04&trackPage=yes"
+                href="https://direct-book.com/properties/akageraparkinn/policies?locale=en"
                 target="_blank" rel="noopener noreferrer"
                 onClick={closeSidebar}
               >Policies</a>

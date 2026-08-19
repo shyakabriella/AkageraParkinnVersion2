@@ -1,23 +1,24 @@
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useReveal } from "../../hooks/useReveal";
 
-function MobileBottomBar() {
-  const handleOpenMenu = () => {
-    window.dispatchEvent(new CustomEvent("toggle-mobile-menu"));
-  };
+// Shared phone number — single source of truth
+const PHONE_NUMBER = "+250788395521";
+const PHONE_DISPLAY = "+250 788 395 521";
 
+function MobileBottomBar({ onOpenMenu }) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-[999] md:hidden">
-      <div 
+      <div
         className="grid h-[68px] grid-cols-3 overflow-hidden bg-white"
         style={{ borderTop: '1px solid #e5e7eb', boxShadow: '0 -4px 12px rgba(0,0,0,0.08)' }}
       >
         <button
           type="button"
-          onClick={handleOpenMenu}
+          onClick={onOpenMenu}
+          aria-label="Open navigation menu"
           className="flex flex-col items-center justify-center transition-colors"
           style={{ borderRight: '1px solid #e5e7eb', color: '#4a4a4a' }}
         >
@@ -41,9 +42,10 @@ function MobileBottomBar() {
         </button>
 
         <a
-          href="tel:+250788471880"
+          href={`tel:${PHONE_NUMBER}`}
           className="flex flex-col items-center justify-center transition-colors"
           style={{ borderRight: '1px solid #e5e7eb', color: '#4a4a4a' }}
+          aria-label={`Call us: ${PHONE_DISPLAY}`}
         >
           <span className="mb-1 inline-flex">
             <svg
@@ -76,10 +78,17 @@ function MobileBottomBar() {
   );
 }
 
-export default function Layouts() {
+export default function Layout() {
   const location = useLocation();
   const path = location.pathname;
-  const isStartPlanningPage = path === "/start-planning";
+
+  // Sidebar open state — key it to path so it auto-closes on navigation
+  // sidebarPath stores which path the sidebar was opened on
+  const [sidebarOpenPath, setSidebarOpenPath] = useState(null);
+  const sidebarOpen = sidebarOpenPath === path;
+  const openSidebar = () => setSidebarOpenPath(path);
+  const closeSidebar = () => setSidebarOpenPath(null);
+  const toggleSidebar = () => setSidebarOpenPath(prev => (prev === path ? null : path));
 
   useReveal(path);
 
@@ -89,12 +98,17 @@ export default function Layouts() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-sand-50">
-      <Navbar currentPath={path} />
-      <main className={isStartPlanningPage ? "pb-0" : "pb-[74px] lg:pb-0"}>
+      <Navbar
+        currentPath={path}
+        sidebarOpen={sidebarOpen}
+        onToggleSidebar={toggleSidebar}
+        onCloseSidebar={closeSidebar}
+      />
+      <main className="pb-[74px] lg:pb-0">
         <Outlet />
       </main>
       <Footer />
-      {!isStartPlanningPage && <MobileBottomBar />}
+      <MobileBottomBar onOpenMenu={openSidebar} />
     </div>
   );
 }

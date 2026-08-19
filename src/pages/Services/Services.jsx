@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePageInit } from '../../hooks/usePageInit';
 
 const Services = () => {
@@ -25,18 +24,19 @@ const Services = () => {
           <div className="hly-section-header" style={{ justifyContent: 'center', textAlign: 'center' }}>
             <div>
               <span className="hly-banner-subtitle" style={{ color: '#B89146' }}>Explore Our Services</span>
-              <h2 style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.2rem', color: '#666667', fontWeight: 400, lineHeight: 1.8 }}>
-                At Akagera Park Inn, we’re committed to creating an experience that goes beyond the ordinary. From luxurious accommodations and exceptional dining to unique cultural activities and relaxing wellness options, each service is crafted to make your stay unforgettable.
-              </h2>
+              {/* Fix: was h2 — descriptive intro text should be a <p> */}
+              <p className="hly-section-intro">
+                At Akagera Park Inn, we&apos;re committed to creating an experience that goes beyond the ordinary. From luxurious accommodations and exceptional dining to unique cultural activities and relaxing wellness options, each service is crafted to make your stay unforgettable.
+              </p>
             </div>
           </div>
 
           <div className="hly-rooms-grid" style={{ gap: '2.5rem' }}>
-            
+
             {/* Service 1 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/camp.jpg" alt="Camping Services" loading="lazy" />
+                <img src="/img/camp.jpg" alt="Camping setup with bonfire at Akagera Park Inn" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <h4>Camping Services</h4>
@@ -50,7 +50,7 @@ const Services = () => {
             {/* Service 2 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/guide.jpg" alt="Tour Guiding Services" loading="lazy" />
+                <img src="/img/guide.jpg" alt="Expert local tour guide leading group exploration" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <h4>Tour Guiding Services</h4>
@@ -64,7 +64,7 @@ const Services = () => {
             {/* Service 3 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/hik.jpg" alt="Hiking Adventures" loading="lazy" />
+                <img src="/img/hik.jpg" alt="Guided hike along forest trails near Akagera" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <h4>Hiking Adventures</h4>

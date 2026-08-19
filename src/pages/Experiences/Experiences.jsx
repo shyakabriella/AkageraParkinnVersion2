@@ -1,9 +1,8 @@
-import React from 'react';
 import { usePageInit } from '../../hooks/usePageInit';
 
 const Experiences = () => {
   usePageInit();
-  
+
   return (
     <div className="hly-page">
       {/* Inner Banner */}
@@ -24,19 +23,20 @@ const Experiences = () => {
         <div className="hly-container">
           <div className="hly-section-header" style={{ justifyContent: 'center', textAlign: 'center' }}>
             <div>
-              <span className="hly-banner-subtitle" style={{ color: '#B89146' }}>Akagera Activities & Entertainment</span>
-              <h2 style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.2rem', color: '#666667', fontWeight: 400, lineHeight: 1.8 }}>
+              <span className="hly-banner-subtitle" style={{ color: '#B89146' }}>Akagera Activities &amp; Entertainment</span>
+              {/* Fix: was incorrectly an h2 — this is descriptive body text, not a heading */}
+              <p className="hly-section-intro">
                 From peaceful mornings surrounded by nature to lively evenings by the fire, Akagera Park Inn offers a variety of experiences that blend culture, relaxation, and adventure. Explore some of our signature activities below.
-              </h2>
+              </p>
             </div>
           </div>
 
           <div className="hly-rooms-grid" style={{ gap: '2.5rem' }}>
-            
+
             {/* Experience 1 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/cv.jpg" alt="Cultural Experiences" loading="lazy" />
+                <img src="/img/cv.jpg" alt="Local cultural walk and village visit" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <span className="hly-room-price">Start: 07:00 • Every Sunday</span>
@@ -48,11 +48,11 @@ const Experiences = () => {
             {/* Experience 2 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/ebs.jpg" alt="Evening Bonfire & Stargazing" loading="lazy" />
+                <img src="/img/ebs.jpg" alt="Evening bonfire and stargazing under clear skies" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <span className="hly-room-price">Start: 18:00 • Every Day</span>
-                <h4>Evening Bonfire & Stargazing</h4>
+                <h4>Evening Bonfire &amp; Stargazing</h4>
                 <p>Relax by the bonfire under clear volcanic skies, enjoy music and good company, and soak in the peaceful night ambience.</p>
               </div>
             </div>
@@ -60,11 +60,11 @@ const Experiences = () => {
             {/* Experience 3 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/fga.jpg" alt="Nature Trails & Scenic Walks" loading="lazy" />
+                <img src="/img/fga.jpg" alt="Nature trail through lush greenery" loading="lazy" />
               </div>
               <div className="hly-room-body">
-                <span className="hly-room-price">Morning & Afternoon • Daily</span>
-                <h4>Nature Trails & Scenic Walks</h4>
+                <span className="hly-room-price">Morning &amp; Afternoon • Daily</span>
+                <h4>Nature Trails &amp; Scenic Walks</h4>
                 <p>Stroll through lush greenery and scenic viewpoints around the Hotel, with gentle guided walks suitable for all ages.</p>
               </div>
             </div>
@@ -72,11 +72,11 @@ const Experiences = () => {
             {/* Experience 4 */}
             <div className="hly-room-card">
               <div className="hly-room-img">
-                <img src="/img/NTSW.jpg" alt="Family & Group Activities" loading="lazy" />
+                <img src="/img/NTSW.jpg" alt="Family group activity session" loading="lazy" />
               </div>
               <div className="hly-room-body">
                 <span className="hly-room-price">Custom Schedules • On Request</span>
-                <h4>Family & Group Activities</h4>
+                <h4>Family &amp; Group Activities</h4>
                 <p>From small celebrations to team-building moments, we create tailored activities that bring families and friends together.</p>
               </div>
             </div>
